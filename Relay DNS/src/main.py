@@ -3,9 +3,10 @@
 #__author__ = 'E-Tsai'
 #read command
 from tests import *
-from dnsrelay import *
+from Server import *
 
 if __name__ == '__main__':
-    server = DNSServer()
+    server = Server()
     server.runServer()
+
     # debug()

@@ -3,7 +3,7 @@
 #__author__ = 'E-Tsai'
 #tests
 
-from dnsrelay import*
+from Server import*
 
 def debug():
     print('::This is a relay DNS')
