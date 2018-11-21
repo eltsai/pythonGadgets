@@ -5,46 +5,57 @@
 
 from Server import*
 
-def debug():
-    print('::This is a relay DNS')
-    print('::Enter: \'dnsrelay [-d][-dd] [dns-server-ipaddr] [filename]\' to obtain ip')
-    print('::Enter: \'stop\' to stop program ')
-    ip_list = 'dnsrelay.txt'
-    #ip_list = 'new.txt'
-    dns_server = input('DNS server: ')
-    while 1:
-        command = input('> ')
-        if command ==  'stop':
-            break
-        command_seg = command.split(' ')
-        if not command_seg:
-            continue
-        elif command_seg[0] != 'dnsrelay':
-            print('::command not found')
-        elif len(command_seg) > 1 and command_seg[1] == '-d':
-            testL2()
-        elif len(command_seg) > 1 and command_seg[1] == '-dd':
-            testL3()
-        else:
-            for item in command_seg[1:]:
-                if '.txt' in item:
-                    ip_list = item
+def error():
+    """
+    err prompt msg
+    """
+    print("::Wrong cmd, please try again")
+
+def checkIP(s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if s.count(".") != 3:
+            return False
+        num = ''
+        for i in range(len(s)):
+            if s[i] == '.':
+                if num and (num == '0' or num[0] != '0') and int(num) < 256:
+                    num = ''
                 else:
-                    dns_server = item
-            test(dns_server, ip_list)
-    print('::byeeee :D')
-
-
-
-def test(dns_server, ip_list):
-    ip_cache = localTable(ip_list)
-    while 1:
-        name = input('search: ')
-        if name == 'stop':
-            break
-        if name in ip_cache:
-            if ip_cache[name] == '0.0.0.0':
-                print('::Error: domain does not exist.')
+                    return False
+            elif s[i].isdigit():
+                num += s[i]
             else:
-                print('::',name,'ip:', ip_cache[name])
-    print('::Test level-1 stopped')
+                return False
+        return num and (num == '0' or num[0] != '0') and int(num) < 256
+
+def testL1():
+    """
+    debug level 1
+    """
+    print("::Entering debug level 1...")
+    server = Server()
+    server.loadCache()
+    server.run()
+
+
+def testL2(pub_sev, cache_addr):
+    """
+    :type pub_sev, cache_addr: str
+    debug level 3
+    """
+    print("::Entering debug level 2...")
+    server = Server((pub_sev, 53))
+    server.loadCache(cache_addr)
+    server.run()
+
+def testL3(pub_sev):
+    """
+    debug level 3
+    """
+    print("::Entering debug level 3...")
+    server = Server((pub_sev, 53))
+    server.loadCache()
+    server.run()
