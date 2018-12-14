@@ -118,7 +118,7 @@ class Server:
                     cur = 0
                 
                 sock, data, client_address = public_request[0]
-                print("request: ", data)
+                #print("request: ", data)
                 analyzer = DNSAnalyzer(data)
                 id[cur] = analyzer.get_id()
                 
@@ -137,7 +137,7 @@ class Server:
                 else:
                     reply_analyzer = DNSAnalyzer(reply)
                     domain = reply_analyzer.get_domain()
-                    print("reply:", reply)
+                    #print("reply:", reply)
                     ip = reply_analyzer.get_ip(reply)
                     print("----------------------------------------------------\n")
                     print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
