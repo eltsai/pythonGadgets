@@ -53,7 +53,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                     print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
                     if testLev == 2:
                         localID = analyzer.get_id()
-                        socTime = time.ctime()
+                        socTime = ctime()
                         print("\n:: WHEN: {}".format(socTime))
                         print(":: ID: {}".format(localID))
                     elif testLev == 3:
@@ -122,8 +122,8 @@ class Server:
                 #print("request: ", data)
                 analyzer = DNSAnalyzer(data)
                 id[cur] = analyzer.get_id()
-                
-                
+                #print("request id: ", id[cur])
+
                 self.sock.sendto(analyzer.request(cur), self.public_server)
                 #self.sock.setblocking(1)
                 #print("reley")
@@ -143,7 +143,7 @@ class Server:
                     print("----------------------------------------------------\n")
                     print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
                     if testLev == 2:
-                        socTime = time.ctime()
+                        socTime = ctime()
                         print("\n:: WHEN: {}".format(socTime))
                         print(":: ID: {}".format(id[cur]))
                     elif testLev == 3:

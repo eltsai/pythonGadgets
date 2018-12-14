@@ -55,9 +55,11 @@ class DNSAnalyzer:
             self.question = DNSQuestion(data[12:])
 
     def get_id(self):
+        #print("getid: ", self.Id)
         return self.Id
 
     def set_id(self, i):
+        #print("setid: ", i)
         self.Id = i
 
 
