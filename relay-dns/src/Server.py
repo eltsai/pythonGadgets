@@ -8,7 +8,7 @@ import socketserver
 import socket
 from DNSAnalyzer import *
 from threading import Thread 
-import time
+from time import ctime
 
 local_addr = "dnsrelay.txt"
 BUFSIZE = 1024

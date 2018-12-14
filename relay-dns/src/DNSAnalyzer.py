@@ -51,8 +51,8 @@ class DNSAnalyzer:
         # qd: Question Count, specifies the number of questions
         # an: Answer Record Count: specifies the number of resource records
         # ar: Additional Record Count: specifies the number of resource records
-
-        self.question = DNSQuestion(data[12:])
+        if len(data) > 12:
+            self.question = DNSQuestion(data[12:])
 
     def get_id(self):
         return self.Id
