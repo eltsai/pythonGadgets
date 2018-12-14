@@ -16,13 +16,8 @@ if __name__ == '__main__':
     while 1:
         command = input('> ')
         if not command:
-            testL1()
+            continue
         command_seg = command.split(' ')
-        
-            
-
-
-
 
 
         if command_seg[0] != 'dnsrelay':
