@@ -112,6 +112,7 @@ class Server:
         # start a loop to deal with task queue
         while True:
             if len(public_request) > 0:
+                global cur
                 if cur < MAXQUEUE:
                     cur += 1
                 else:
