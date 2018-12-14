@@ -17,6 +17,7 @@ id = {}
 local_cache = {}
 server_114 = "114.114.114.114"
 public_request = [] 
+cur = 0
 
 
 class UDPHandler(socketserver.BaseRequestHandler):
@@ -58,7 +59,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                     elif testLev == 3:
                         print(":: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
                         #print(type(data))
-                        print(":: RAW DATA:{}".format(data))
+                        print(":: RAW DATA:\n{}".format(data))
 
                     print("\n----------------------------------------------------\n")
                 sock.sendto(analyzer.response(), self.client_address)
@@ -109,7 +110,6 @@ class Server:
 
     def UDPThreading(self):
         # start a loop to deal with task queue
-        cur = 0
         while True:
             if len(public_request) > 0:
                 if cur < MAXQUEUE:
@@ -147,7 +147,7 @@ class Server:
                         print(":: ID: {}".format(id[cur]))
                     elif testLev == 3:
                         print("\n:: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
-                        print(":: DATA:{}".format(data))
+                        print(":: DATA:\n{}".format(data))
                     print("\n----------------------------------------------------\n")
                     rest = reply[2:]
                     Id = id[cur]
