@@ -3,44 +3,33 @@
 #__author__ = 'E-Tsai'
 #read command
 from Debug import *
+import argparse
+
+parser = argparse.ArgumentParser(description='This is a relay DNS')
+parser.add_argument("dnsrelay", nargs='?')
+parser.add_argument("-d", help="Enter debug mode level 2", action="store_true")
+parser.add_argument("-dd", help="Enter debug mode level 3", action="store_true")
+args, unknown = parser.parse_known_args()
+#print(args, unknown)
+
 
 
 if __name__ == '__main__':
 
-    print(':: This is a relay DNS')
-    print(':: Enter: \'dnsrelay [-d][-dd] [dns-server-ipaddr] [filename]\' to obtain ip')
-    print(':: Enter: ctrl + c to stop program ')
-    ip_list = 'dnsrelay.txt'
-    #ip_list = 'new.txt'
-    # dns_server = input('DNS server: ')
-    while 1:
-        command = input('> ')
-        if not command:
-            continue
-        command_seg = command.split(' ')
+    if not args.dnsrelay:
+        testL1(0)
+    elif not args.d and not args.dd:
+        testL1(1)
+    elif args.d:
+        if len(unknown) == 0:
+            testL2("", "")
+        elif len(unknown) == 2:
+            testL2(unknown[0], unknown[1])
+    elif args.dd:
+        if len(unknown) == 0:
+            testL3("")
+        elif len(unknown) == 1:
+            testL3(unknown[0])
+    error()
 
-
-        if command_seg[0] != 'dnsrelay':
-            error()
-        # test 2
-        elif len(command_seg) > 1 and command_seg[1] == '-d':
-            if len(command_seg) == 2:
-                testL2("", "")
-            # wrong commond, invalid ip 
-            elif len(command_seg) != 4 or not checkIP(command_seg[2]):
-                error()
-            else:
-                testL2(command_seg[2], command_seg[3])
-        #test3
-        elif len(command_seg) > 1 and command_seg[1] == '-dd':
-            if len(command_seg) == 2:
-                testL3("")
-            if checkIP(command_seg[2]) and len(command_seg) == 3:
-                testL3(command_seg[2])
-            else:
-                error()
-        # test1
-        else:
-            testL1()
-    print(':: byeeee :D')
     

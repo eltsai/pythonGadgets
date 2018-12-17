@@ -31,12 +31,12 @@ def checkIP(s):
                 return False
         return num and (num == '0' or num[0] != '0') and int(num) < 256
 
-def testL1():
+def testL1(l):
     """
     debug level 1
     """
     #print(":: Entering debug level 1...")
-    server = Server((server_114, 53), 1, local_addr)
+    server = Server((server_114, 53), l, local_addr)
     server.run()
 
 
@@ -46,11 +46,14 @@ def testL2(pub_sev, cache_addr):
     debug level 3
     """
     
-    print(":: Entering debug level 2...")
+    #print(":: Entering debug level 2...")
     if not pub_sev:
         server = Server((server_114, 53), 2, local_addr)
     else:
-        print(":: Selected public server: {}\n:: Selected local cache: {}".format(pub_sev, cache_addr))
+        #print(":: Selected public server: {}\n:: Selected local cache: {}".format(pub_sev, cache_addr))
+        if not checkIP(pub_sev):
+            error();
+            return
         server = Server((pub_sev, 53), 2, cache_addr)
 
     server.run()
@@ -59,12 +62,15 @@ def testL3(pub_sev):
     """
     debug level 3
     """
-    if not  pub_sev:
-        print(":: Entering debug level 3...")
+    if not pub_sev:
+        #print(":: Entering debug level 3...")
         server = Server((server_114, 53), 3, local_addr)
         
     else:
-        print(":: Selected public server:", pub_sev)
-        print(":: Entering debug level 3...")
+        #print(":: Selected public server:", pub_sev)
+        #print(":: Entering debug level 3...")
+        if not checkIP(pub_sev):
+            error()
+            return;
         server = Server((pub_sev, 53), 3, local_addr)
     server.run()

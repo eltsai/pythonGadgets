@@ -41,25 +41,26 @@ class UDPHandler(socketserver.BaseRequestHandler):
             if domain in local_cache:
                 ip = local_cache[domain]
                 analyzer.set_ip(ip)
-                #print(":: Requesting ip from local cache...")
-                if ip == "0.0.0.0":
-                    # blacklisted website
-                    print("----------------------------------------------------\n")
-                    print(":: Error: domain {} does not exist.\n".format(domain.upper()))
-                    print("----------------------------------------------------\n")
-                else:
-                    #print(":: Domain exists on local server..")
-                    print("----------------------------------------------------\n")
-                    print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
-                    if testLev == 2:
-                        localID = analyzer.get_id()
-                        socTime = ctime()
-                        print("\n:: WHEN: {}".format(socTime))
-                        print(":: ID: {}".format(localID))
-                    elif testLev == 3:
-                        print(":: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
-                        #print(type(data))
-                        print(":: RAW DATA:\n{}".format(data))
+                
+                if testLev:
+                    if ip == "0.0.0.0":
+                        # blacklisted website
+                        print("----------------------------------------------------\n")
+                        print(":: Error: domain {} does not exist.\n".format(domain.upper()))
+                        print("----------------------------------------------------\n")
+                    else:
+                        #print(":: Domain exists on local server..")
+                        print("----------------------------------------------------\n")
+                        print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
+                        if testLev == 2:
+                            localID = analyzer.get_id()
+                            socTime = ctime()
+                            print("\n:: WHEN: {}".format(socTime))
+                            print(":: ID: {}".format(localID))
+                        elif testLev == 3:
+                            print(":: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
+                            #print(type(data))
+                            print(":: RAW DATA:\n{}".format(data))
 
                     print("\n----------------------------------------------------\n")
                 sock.sendto(analyzer.response(), self.client_address)
@@ -67,9 +68,9 @@ class UDPHandler(socketserver.BaseRequestHandler):
             else:
                 # relay
                 
-                public_request.append((sock, data.upper(), self.client_address))
+                public_request.append((sock, data, self.client_address))
         else:
-            sock.sendto(data.upper(), self.client_address)
+            sock.sendto(data, self.client_address)
 
 
 class Server:
@@ -85,6 +86,7 @@ class Server:
         global testLev
         testLev = testLevel
         self.loadCache()
+        #print(local_cache)
         # https://public-dns.info/nameserver/cn.html, using UDP    
   
     def loadCache(self):
@@ -140,16 +142,17 @@ class Server:
                     domain = reply_analyzer.get_domain()
                     #print("reply:", reply)
                     ip = reply_analyzer.get_ip(reply)
-                    print("----------------------------------------------------\n")
-                    print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
-                    if testLev == 2:
-                        socTime = ctime()
-                        print("\n:: WHEN: {}".format(socTime))
-                        print(":: ID: {}".format(id[cur]))
-                    elif testLev == 3:
-                        print("\n:: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
-                        print(":: DATA:\n{}".format(data))
-                    print("\n----------------------------------------------------\n")
+                    if testLev:
+                        print("----------------------------------------------------\n")
+                        print(":: ANSWER SECTION:\n\n   {}.   {}".format(domain.upper(), ip))
+                        if testLev == 2:
+                            socTime = ctime()
+                            print("\n:: WHEN: {}".format(socTime))
+                            print(":: ID: {}".format(id[cur]))
+                        elif testLev == 3:
+                            print("\n:: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
+                            print(":: DATA:\n{}".format(data))
+                        print("\n----------------------------------------------------\n")
                     rest = reply[2:]
                     Id = id[cur]
                     reply = struct.pack("!H", Id) + rest
