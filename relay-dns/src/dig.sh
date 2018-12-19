@@ -7,5 +7,9 @@ dig test2 @127.0.0.1
 dig sohu.com @127.0.0.1
 dig jd.com @127.0.0.1
 dig sina.com.cn @127.0.0.1
+dig test0 @127.0.0.1
 dig weibo.com @127.0.0.1
-
+dig bing.com @127.0.0.1
+dig github.com @127.0.0.1
+dig bilibili.com @127.0.0.1
+dig google.com @127.0.0.1

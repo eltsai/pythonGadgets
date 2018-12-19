@@ -12,7 +12,7 @@ from time import ctime
 
 local_addr = "dnsrelay.txt"
 BUFSIZE = 1024
-MAXQUEUE = 512 # support max threading of 512
+MAXQUEUE = 2048 # support max threading of 512
 id = {}
 local_cache = {}
 server_114 = "114.114.114.114"
@@ -58,11 +58,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
                             print("\n:: WHEN: {}".format(socTime))
                             print(":: ID: {}".format(localID))
                         elif testLev == 3:
-                            print(":: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
+                            print("\n:: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
                             #print(type(data))
-                            print(":: RAW DATA:\n{}".format(data))
+                            print(":: RAW DATA:\n   {}".format(data))
 
-                    print("\n----------------------------------------------------\n")
+                        print("\n----------------------------------------------------\n")
                 sock.sendto(analyzer.response(), self.client_address)
                 
             else:
@@ -151,7 +151,7 @@ class Server:
                             print(":: ID: {}".format(id[cur]))
                         elif testLev == 3:
                             print("\n:: SERVER: {}#{}({})".format("127.0.0.1", 53, "127.0.0.1"))
-                            print(":: DATA:\n{}".format(data))
+                            print(":: DATA:\n   {}".format(data))
                         print("\n----------------------------------------------------\n")
                     rest = reply[2:]
                     Id = id[cur]
