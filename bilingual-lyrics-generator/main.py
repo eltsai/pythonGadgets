@@ -8,22 +8,19 @@ if __name__ == '__main__':
         :type inputString: str
         :rtype:str
         """
-        print("hi")
-        res = ''
+        
         
         lines = t.get("1.0",'end-1c').splitlines()
-        for i in range((len(lines)-1)//2):
+        
+        for i in range((len(lines)-1)//2+1):
             timeaxis = lines[2*i][:7]
-            lines[2*i+1].insert(0, timeaxis)
-            res += lines[2*i]
-            res += '\n'
-            res += lines[2*i+1]
-            res += '\n'
-        t.insert("1.0", res)
-        print(res)
+            lines[2*i+1] = timeaxis + lines[2*i+1]
+        t.delete("1.0",'end-1c')
+        t.insert("1.0", "\n".join(lines))
+        
     root = tk.Tk()
     root.title("Bi-Ly-Ge")
-    t = tk.Text(root, height=50, width=40)
+    t = tk.Text(root, height=20, width=40)
     t.pack()
     button = tk.Button(root, text='Add Time', width=20, command=generatelyrics)
     button.pack()
