@@ -4,7 +4,7 @@
 
 linux，python3.
 
-### Run code
+### Run Server
 
 under `/src`
 
@@ -12,16 +12,20 @@ under `/src`
 sudo python3 main.py
 ```
 to start this dns server (running at 127.0.0.1)
-
+### Debug Mode
 use
-```
+```bash
 sudo python3 dnsrelay [-d][-dd] [public-server] [local-cache]
 ```
 to enter debug mode
-
+### Tests
 use
-```
+```bash
 dig your-domain @127.0.0.1
+```
+or
+```bash
+sudo chmod +x dig.sh && ./dig.sh
 ```
 to test this server
 
