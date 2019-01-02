@@ -1,5 +1,4 @@
-#  A Relay DNS中继服务器
-
+#  A Relay DNS Server
 ### Environment
 
 linux，python3.
