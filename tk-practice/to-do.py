@@ -14,7 +14,7 @@ class Todo(tk.Tk):
         else:
             self.tasks = tasks
 
-        self.tasks_canvas = tk.Canvas(self)
+        self.tasks_canvas = tk.Canvas(self) # father of tasks_frame
 
         self.tasks_frame = tk.Frame(self.tasks_canvas)
         self.text_frame = tk.Frame(self)
@@ -31,7 +31,7 @@ class Todo(tk.Tk):
         self.tasks_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        self.canvas_frame = self.tasks_canvas.create_window((0, 0), window=self.tasks_frame, anchor="n")
+        self.canvas_frame = self.tasks_canvas.create_window((0, 0), window=self.tasks_frame, anchor="n") # n means north: TOP
 
         self.task_create.pack(side=tk.BOTTOM, fill=tk.X)
         self.text_frame.pack(side=tk.BOTTOM, fill=tk.X)
