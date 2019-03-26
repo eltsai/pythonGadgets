@@ -28,19 +28,19 @@ sudo chmod +x dig.sh && ./dig.sh
 ```
 to test this server
 
-### 实现功能
+### Others
 
-- [x] 不良网站拦截功能：在本地ip cache中找到对应ip为'0.0.0.0'，返回域名不存在
+- [x] Blacklisted website：find '0.0.0.0' in local ip cache, return 'Domain do not exist.'
 
-- [x] 服务器功能&中继功能：
+- [x] server & relay server：
 
-- [x] 调试级别1：`sudo python3 dnsrelay`
+- [x] debug level 1：`sudo python3 dnsrelay` output: ip
 
-- [x] 调试级别2: `sudo python3 dnsrelay -d [public-server] [local-cache]`
+- [x] debug level 2: `sudo python3 dnsrelay -d [public-server] [local-cache]`: output ip, time
 
-- [x] 调试级别3：`sudo python3 -dd [public-server]`
+- [x] debug level 3：`sudo python3 -dd [public-server]` output ip, dns answer message content
 
-- [x] 多客户端并发&超时处理：
+- [x] Multi-client concurrency & timeout processing：
 
 
 
