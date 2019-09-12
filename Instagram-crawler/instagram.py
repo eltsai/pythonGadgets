@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#coding=utf-8
 import os
 import re
 import sys
@@ -14,7 +16,7 @@ uri = 'https://www.instagram.com/graphql/query/?query_hash=a5164aed103f24b03e7b7
 
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-    'cookie': '这里加上自己的cookie'
+    #'cookie': '这里加上自己的cookie'
 }
 
 
@@ -24,7 +26,7 @@ def get_html(url):
         if response.status_code == 200:
             return response.text
         else:
-            print('请求网页源代码错误, 错误状态码：', response.status_code)
+            print('Error responses, status code：', response.status_code)
     except Exception as e:
         print(e)
         return None
@@ -36,7 +38,7 @@ def get_json(url):
         if response.status_code == 200:
             return response.json()
         else:
-            print('请求网页json错误, 错误状态码：', response.status_code)
+            print('Invalid JSON string, status code:', response.status_code)
     except Exception as e:
         print(e)
         time.sleep(60 + float(random.randint(1, 4000))/100)
@@ -49,7 +51,7 @@ def get_content(url):
         if response.status_code == 200:
             return response.content
         else:
-            print('请求照片二进制流错误, 错误状态码：', response.status_code)
+            print('IMG binary byte stream unaccessible, status code：', response.status_code)
     except Exception as e:
         print(e)
         return None
@@ -58,7 +60,7 @@ def get_content(url):
 def get_urls(html):
     urls = []
     user_id = re.findall('"profilePage_([0-9]+)"', html, re.S)[0]
-    print('user_id：' + user_id)
+    #print('user_id：' + user_id)
     doc = pq(html)
     items = doc('script[type="text/javascript"]').items()
     for item in items:
@@ -71,9 +73,9 @@ def get_urls(html):
             for edge in edges:
                 if edge['node']['display_url']:
                     display_url = edge['node']['display_url']
-                    print(display_url)
+                    #print(display_url)
                     urls.append(display_url)
-            print(cursor, flag)
+            #print(cursor, flag)
     while flag:
         url = uri.format(user_id=user_id, cursor=cursor)
         js_data = get_json(url)
@@ -97,38 +99,38 @@ def get_urls(html):
 
 
 def main(user):
+
     url = url_base + user + '/'
     html = get_html(url)
     urls = get_urls(html)
-    dirpath = r'C:\Users\Ph\Pictures\Instagram\{0}'.format(user)
+    dirpath = r'./{}'.format(user)
     if not os.path.exists(dirpath):
         os.mkdir(dirpath)
     for i in range(len(urls)):
-        print('\n正在下载第{0}张： '.format(i) + urls[i], ' 还剩{0}张'.format(len(urls)-i-1))
+        print('\nDownloading the {}th image： '.format(i) + urls[i], ' {} images remaining'.format(len(urls)-i-1))
         try:
             content = get_content(urls[i])
             endw = 'mp4' if r'mp4?_nc_ht=scontent.cdninstagram.com' in urls[i] else 'jpg'
-            file_path = r'C:\Users\Ph\Pictures\Instagram\{0}\{1}.{2}'.format(user, md5(content).hexdigest(), endw)
+            file_path = r'./{}/{}.{}'.format(user, md5(content).hexdigest(), endw)
             if not os.path.exists(file_path):
                 with open(file_path, 'wb') as f:
-                    print('第{0}张下载完成： '.format(i) + urls[i])
+                    print('Completed downloading the {0}th image： '.format(i) + urls[i])
                     f.write(content)
                     f.close()
             else:
-                print('第{0}张照片已下载'.format(i))
+                print('Completed downloading the {0}th image'.format(i))
         except Exception as e:
             print(e)
-            print('这张图片or视频下载失败')
+            print('!!Image downloading failed: no such file or directory.')
 
 
 if __name__ == '__main__':
     user_name = sys.argv[1]
     start = time.time()
     main(user_name)
-    print('Complete!!!!!!!!!!')
     end = time.time()
     spend = end - start
     hour = spend // 3600
     minu = (spend - 3600 * hour) // 60
     sec = spend - 3600 * hour - 60 * minu
-    print(f'一共花费了{hour}小时{minu}分钟{sec}秒')
+    print('Time: {}: {}: {}'.format(hour, minu, sec))
