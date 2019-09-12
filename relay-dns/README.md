@@ -1,8 +1,4 @@
 #  A Relay DNS Server
-### Environment
-
-linux，python3.
-
 ### Run Server
 
 under `/src`
@@ -40,7 +36,7 @@ to test this server
 
 - [x] debug level 3：`sudo python3 -dd [public-server]` output ip, dns answer message content
 
-- [x] Multi-client concurrency & timeout processing：
+- [x] Multi-client concurrency & timeout processing
 
 
 
