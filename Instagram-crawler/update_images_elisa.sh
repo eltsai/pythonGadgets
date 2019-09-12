@@ -1,3 +1,6 @@
 #!/bin/sh
-mkdir -p elisatdraws
-python3 instagram.py elisatdraws
+USR_NAME=elisatdraws
+
+
+mkdir -p ${USR_NAME}
+python3 instagram.py ${USR_NAME}

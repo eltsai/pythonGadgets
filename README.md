@@ -5,5 +5,5 @@ Gadgets written in python
 
 [GUI for bilingual lyrics time axis generator](bilingual-lyrics-generator)
 
-[instagram crawler](Instagram-crawler): Kudos to [linqingmaoer](https://github.com/linqingmaoer)! 
+[Instagram crawler](Instagram-crawler): Kudos to [linqingmaoer](https://github.com/linqingmaoer)! 
 
