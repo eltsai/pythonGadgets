@@ -14,3 +14,4 @@ Gadgets written in python.
 
 [Send HTTP](send-http) 
 
+[PySocks tests](pysocks)

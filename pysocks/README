@@ -1,0 +1,2 @@
+lib: https://github.com/Anorov/PySocks
+modules: socks and sockshandler
