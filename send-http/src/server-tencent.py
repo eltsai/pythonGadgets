@@ -19,7 +19,7 @@ while True:
         if not data: break
 
         print("Client Says: "+str(data))
-        conn.sendall(b'Server Says:hi')
+        conn.sendall(b'Server Says: freegate')
 
     except socket.error:
         print("Error Occured.")
