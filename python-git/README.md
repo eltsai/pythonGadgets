@@ -1,1 +1,1 @@
-https://wyag.thb.lt/
+tutorial: https://wyag.thb.lt/
