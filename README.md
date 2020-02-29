@@ -16,4 +16,6 @@ Gadgets written in python.
 
 [PySocks tests](pysocks)
 
-[git written in python](python-git)
+[git written in python](python-git) 
+
+[Weibo Instant view](weibo-instant-view) 
