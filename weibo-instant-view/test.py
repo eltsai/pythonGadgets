@@ -7,7 +7,10 @@ from telegram import InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import InlineQueryHandler
 import logging
 
-Token = '1062934312:AAER3vsdPpO951Iu9EYP8RuBJbYLgqIzmEc'
+Token = ''
+
+with open("token","r") as file:
+    Token = file.read()
 
 updater = Updater(token=Token, use_context=True)
 
