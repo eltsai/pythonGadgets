@@ -2,7 +2,7 @@
 
 ## Requirements
 
-```
+```shell
 python-telegram-bot
 ```
 
