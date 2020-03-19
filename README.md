@@ -18,4 +18,5 @@ Gadgets written in python.
 
 [git written in python](python-git) 
 
-[Weibo Instant view](weibo-instant-view) 
+[Telegram bots](telegram-bots) 
+
