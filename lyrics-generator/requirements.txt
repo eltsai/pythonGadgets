@@ -1,0 +1,14 @@
+certifi==2022.12.7
+charset-normalizer==2.1.1
+decorator==5.1.1
+graphviz==0.20.1
+idna==3.4
+jieba==0.42.1
+numpy==1.21.6
+objgraph==3.5.0
+paddlepaddle-tiny==1.6.1
+protobuf==4.21.12
+pypinyin==0.47.1
+requests==2.28.1
+six==1.16.0
+urllib3==1.26.13
