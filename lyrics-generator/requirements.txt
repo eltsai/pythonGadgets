@@ -4,7 +4,7 @@ decorator==5.1.1
 graphviz==0.20.1
 idna==3.4
 jieba==0.42.1
-numpy==1.21.6
+numpy==1.22.0
 objgraph==3.5.0
 paddlepaddle-tiny==1.6.1
 protobuf==4.21.12
